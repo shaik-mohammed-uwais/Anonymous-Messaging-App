@@ -35,38 +35,45 @@ export default function Home() {
       </section>
 
       {/* Carousel for Messages */}
-      <Carousel
-        plugins={[Autoplay({ delay: 2500 })]}
-        className="w-full max-w-2xl mx-auto"
-      >
-        <CarouselContent>
-          {messages.map((message, index) => {
-            const bgColor = CARD_COLORS[index % CARD_COLORS.length];
+<Carousel
+  plugins={[Autoplay({ delay: 2500 })]}
+  className="w-full max-w-2xl mx-auto"
+>
+  <CarouselContent>
+    {messages.map((message, index) => {
+      const bgColor = CARD_COLORS[index % CARD_COLORS.length];
 
-            return (
-              <CarouselItem key={index} className="p-4 flex justify-center">
-                <Card
-                  className="w-full max-w-md rounded-2xl shadow-md"
-                  style={{ backgroundColor: bgColor, color: "#FFFFFF" }}
-                >
-                  <CardHeader className="text-center">
-                    <CardTitle className="font-semibold text-lg md:text-xl text-white">
-                      {message.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex flex-col items-center space-y-3 text-center">
-                    <Mail className="h-6 w-6 text-white" />
-                    <p className="font-medium text-white">{message.content}</p>
-                    <p className="text-xs text-white opacity-90">
-                      {message.received}
-                    </p>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            );
-          })}
-        </CarouselContent>
-      </Carousel>
+      return (
+        <CarouselItem key={index} className="p-4 flex justify-center">
+          <Card
+            className="w-full max-w-md rounded-2xl shadow-md py-5 px-6 flex flex-col gap-3"
+            style={{ backgroundColor: bgColor, color: "#FFFFFF" }}
+          >
+            {/* Message title */}
+            <p className="font-semibold text-base md:text-lg text-white text-left">
+              Message from {message.title}
+            </p>
+
+            {/* Message content with icon */}
+            <div className="flex flex-col items-start gap-1">
+              <div className="flex items-center gap-3">
+                <Mail className="h-6 w-6 text-white" />
+                <p className="text-white text-sm md:text-base leading-snug">
+                  {message.content}
+                </p>
+              </div>
+              {/* Timestamp just below icon */}
+              <p className="text-xs text-white opacity-80 pl-9">
+                {message.received}
+              </p>
+            </div>
+          </Card>
+        </CarouselItem>
+      );
+    })}
+  </CarouselContent>
+</Carousel>
+
 
       {/* CTA Section */}
       <div className="text-center mt-10">
